@@ -1,8 +1,9 @@
 from simulation import SIMULATION
 
-simulation = SIMULATION()
+def Simulate():
+    simulation = SIMULATION()
 
-simulation.Run()
+    simulation.Run()
 
 # import pybullet as p
 # import time
