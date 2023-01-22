@@ -1,74 +1,81 @@
-import pybullet as p
-import time
-import pybullet_data
-import pyrosim.pyrosim as pyrosim
-import numpy
-import random
+from simulation import SIMULATION
+
+simulation = SIMULATION()
+
+simulation.Run()
+
+# import pybullet as p
+# import time
+# import pybullet_data
+# import pyrosim.pyrosim as pyrosim
+# import numpy
+# import random
+# import constants as c
 
 
-physicsClient = p.connect(p.GUI)
-p.setAdditionalSearchPath(pybullet_data.getDataPath())
+# physicsClient = p.connect(p.GUI)
+# p.setAdditionalSearchPath(pybullet_data.getDataPath())
 
-p.setGravity(0,0,-9.8)
+# p.setGravity(0,0,-9.8)
 
-planeId = p.loadURDF("plane.urdf")
-robotId = p.loadURDF("body.urdf")
+# planeId = p.loadURDF("plane.urdf")
+# robotId = p.loadURDF("body.urdf")
 
 
-p.loadSDF("world.sdf")
+# p.loadSDF("world.sdf")
 
-pyrosim.Prepare_To_Simulate(robotId)
+# pyrosim.Prepare_To_Simulate(robotId)
 
-backLegSensorValues = numpy.zeros(1000)
-frontLegSensorValues = numpy.zeros(1000)
+# backLegSensorValues = numpy.zeros(1000)
+# frontLegSensorValues = numpy.zeros(1000)
 
-amplitude = numpy.pi/4
-frequency = 10
-phaseOffset = 0
+# amplitude = numpy.pi/4
+# frequency = 5
+# phaseOffset = 0
 
-x = numpy.sin(numpy.linspace(0, 2*numpy.pi, 1000))
+# x = numpy.sin(numpy.linspace(0, 2*numpy.pi, 1000))
 
-x = amplitude * numpy.sin(frequency * x + phaseOffset)
+# x = amplitude * numpy.sin(frequency * x + phaseOffset)
 
-phaseOffset2 = 0.5
+# phaseOffset2 = 0.5
 
-x2 = amplitude * numpy.sin(frequency * x + phaseOffset2)
+# x2 = amplitude * numpy.sin(20 * x + phaseOffset2)
 
-for i in range(1000):
-    pyrosim.Set_Motor_For_Joint(
+# for i in range(1000):
+#     pyrosim.Set_Motor_For_Joint(
 
-    bodyIndex = robotId,
+#     bodyIndex = robotId,
 
-    jointName = b'Torso_BackLeg',
+#     jointName = b'Torso_BackLeg',
 
-    controlMode = p.POSITION_CONTROL,
+#     controlMode = p.POSITION_CONTROL,
 
-    targetPosition = x[i],
+#     targetPosition = x[i],
 
-    maxForce = 50)
+#     maxForce = 50)
 
-    pyrosim.Set_Motor_For_Joint(
+#     pyrosim.Set_Motor_For_Joint(
 
-    bodyIndex = robotId,
+#     bodyIndex = robotId,
 
-    jointName = b'Torso_FrontLeg',
+#     jointName = b'Torso_FrontLeg',
 
-    controlMode = p.POSITION_CONTROL,
+#     controlMode = p.POSITION_CONTROL,
 
-    targetPosition = x2[i],
+#     targetPosition = x2[i],
 
-    maxForce = 50)
+#     maxForce = 50)
 
-    p.stepSimulation()
-    backLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
-    frontLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("FrontLeg")
+#     p.stepSimulation()
+#     backLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
+#     frontLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("FrontLeg")
 
-    time.sleep(0.001)
+#     time.sleep(0.001)
 
-with open('data/data.npy', 'wb') as f:
-    numpy.save(f,backLegSensorValues)
+# with open('data/data.npy', 'wb') as f:
+#     numpy.save(f,backLegSensorValues)
 
-with open('data/data2.npy', 'wb') as f:
-    numpy.save(f,frontLegSensorValues)
+# with open('data/data2.npy', 'wb') as f:
+#     numpy.save(f,frontLegSensorValues)
 
-p.disconnect()
+# p.disconnect()
