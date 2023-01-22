@@ -24,9 +24,11 @@ class SIMULATION:
         for i in range(1000):
             p.stepSimulation()
             self.robot.Sense(i)
+            self.robot.Think()
             self.robot.Act(i)
 
             time.sleep(0.001)
+
 
     def __del__(self):
         p.disconnect()
