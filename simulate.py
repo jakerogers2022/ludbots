@@ -1,10 +1,10 @@
 from simulation import SIMULATION
 
-def Simulate(gui):
-    simulation = SIMULATION(gui)
+def Simulate(gui, id):
+    simulation = SIMULATION(gui, id)
 
     simulation.Run()
-    simulation.Get_Fitness()
+    simulation.Get_Fitness(id)
 
 # import pybullet as p
 # import time

@@ -10,7 +10,7 @@ import random
 import constants as c
 
 class SIMULATION:
-    def __init__(self, gui):
+    def __init__(self, gui, id):
 
         self.gui = gui
 
@@ -25,7 +25,7 @@ class SIMULATION:
         p.setGravity(0,0,-9.8)
 
         self.world = WORLD()
-        self.robot = ROBOT()
+        self.robot = ROBOT(id)
 
     def Run(self):
         for i in range(500):
@@ -37,8 +37,8 @@ class SIMULATION:
             if self.gui:
                 time.sleep(0.001)
 
-    def Get_Fitness(self):
-        self.robot.Get_Fitness()
+    def Get_Fitness(self, id):
+        self.robot.Get_Fitness(id)
 
 
     def __del__(self):

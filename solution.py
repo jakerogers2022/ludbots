@@ -5,15 +5,16 @@ from simulate import Simulate
 
 
 class SOLUTION:
-    def __init__(self):
+    def __init__(self, id):
         self.weights = numpy.random.rand(3, 2) * 2 - 1
+        self.id = id
 
     def Evaluate(self, gui):
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
-        Simulate(gui)
-        with open('fitness.txt', 'r') as file:
+        Simulate(gui, self.id)
+        with open('fitness'+ str(self.id) +'.txt', 'r') as file:
             self.fitness = float(file.read())
 
     def Mutate(self):
@@ -21,6 +22,9 @@ class SOLUTION:
         col = random.randint(0,1)
 
         self.weights[row][col] = random.random() * 2 - 1
+
+    def Set_Id(self, id):
+        self.id = id
 
     def Create_World(self):
         pyrosim.Start_SDF("world.sdf")
@@ -57,7 +61,7 @@ class SOLUTION:
         pyrosim.End()
 
     def Create_Brain(self):
-        pyrosim.Start_NeuralNetwork("brain.nndf")
+        pyrosim.Start_NeuralNetwork("brain"+ str(self.id) +".nndf")
         pyrosim.Send_Sensor_Neuron(name = 0 , linkName = "Torso")
         pyrosim.Send_Sensor_Neuron(name = 1 , linkName = "FrontLeg")
         pyrosim.Send_Sensor_Neuron(name = 2 , linkName = "BackLeg")
