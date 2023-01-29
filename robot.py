@@ -38,3 +38,9 @@ class ROBOT:
 
     def Think(self):
         self.nn.Update()
+
+    def Get_Fitness(self):
+        print("getting fitness")
+        with open('fitness.txt', 'w') as file:
+            file.write(str(p.getLinkState(self.robotId,0)[0][0]))
+
