@@ -6,13 +6,13 @@ from pyrosim.neuralNetwork import NEURAL_NETWORK
 
 class ROBOT:
     def __init__(self, id):
-        self.robotId = p.loadURDF("body.urdf")
+        self.robotId = p.loadURDF("./bodies/body" + str(id) + ".urdf")
 
         pyrosim.Prepare_To_Simulate(self.robotId)
         self.Prepare_To_Sense()
         self.Prepare_To_Act()
 
-        self.nn = NEURAL_NETWORK("brain" + str(id) + ".nndf")
+        self.nn = NEURAL_NETWORK("./brains/brain" + str(id) + ".nndf")
 
     def Prepare_To_Sense(self):
         self.sensors = {}
@@ -41,6 +41,6 @@ class ROBOT:
 
     def Get_Fitness(self, id):
         print("getting fitness")
-        with open('fitness' + str(id) + '.txt', 'w') as file:
-            file.write(str(p.getLinkState(self.robotId,0)[0][0]))
+        with open('./fitness/fitness' + str(id) + '.txt', 'w') as file:
+            file.write(str( p.getBasePositionAndOrientation(self.robotId)[0][0]))
 
