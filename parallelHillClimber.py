@@ -3,7 +3,7 @@ import copy
 
 class PARALLEL_HILL_CLIMBER:
     def __init__(self):
-        self.populationSize = 40
+        self.populationSize = 20
         self.parents = {}
         self.children = {}
         self.nextId = 0
@@ -14,7 +14,7 @@ class PARALLEL_HILL_CLIMBER:
     def Evolve(self):
         for i in self.parents:
             self.parents[i].Evaluate(False)
-        numberOfGenerations = 50
+        numberOfGenerations = 30
         for currentGeneration in range(numberOfGenerations):
             print("------------------------------------------" + str(currentGeneration))
             ps = []

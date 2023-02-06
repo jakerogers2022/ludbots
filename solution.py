@@ -41,6 +41,41 @@ class SOLUTION:
 
         self.weights[i] = random.random() * 2 - 1
 
+        if random.random() < 0.1:
+            self.numLeft += 1
+
+        if random.random() < 0.1:
+            self.numRight += 1
+
+        if random.random() < 0.1:
+            self.numLeft += 1
+
+        if random.random() < 0.1:
+            self.numRight += 1
+
+        if random.random() < 0.1:
+            self.bodyLength += 0.5
+        
+        if random.random() < 0.1:
+            self.bodyLength -= 0.5
+            self.bodyLength = max(self.bodyLength, 2)
+
+        newWeights = []
+
+        x = numpy.array(range(self.numLeft))
+        y = numpy.array(range(self.numRight)) + (3*self.numLeft)
+
+        i = 0
+        for currentRow in numpy.concatenate([x, y]):
+            for currentColumn in numpy.concatenate([(numpy.array(list(range(self.numLeft*2))) + self.numLeft), ((3*self.numLeft+self.numRight)+numpy.array(list(range(self.numRight*2))))]):
+                if i < len(self.weights):
+                    newWeights.append(self.weights[i])
+                else:
+                    newWeights.append(random.random() * 2 - 1)
+
+        self.weights = newWeights
+
+
     def Set_Id(self, id):
         self.id = id
 
