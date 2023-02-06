@@ -33,6 +33,14 @@ class SOLUTION:
 
         self.weights[i] = random.random() * 2 - 1
 
+        i = random.randint(0,len(self.weights)-1)
+
+        self.weights[i] = random.random() * 2 - 1
+
+        i = random.randint(0,len(self.weights)-1)
+
+        self.weights[i] = random.random() * 2 - 1
+
     def Set_Id(self, id):
         self.id = id
 

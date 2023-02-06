@@ -42,5 +42,5 @@ class ROBOT:
     def Get_Fitness(self, id):
         print("getting fitness")
         with open('./fitness/fitness' + str(id) + '.txt', 'w') as file:
-            file.write(str( p.getBasePositionAndOrientation(self.robotId)[0][0]))
+            file.write(str( abs(p.getBasePositionAndOrientation(self.robotId)[0][1])))
 

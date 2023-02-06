@@ -3,11 +3,11 @@ import copy
 
 class PARALLEL_HILL_CLIMBER:
     def __init__(self):
-        populationSize = 15
+        self.populationSize = 40
         self.parents = {}
         self.children = {}
         self.nextId = 0
-        for i in range(populationSize):
+        for i in range(self.populationSize):
             self.parents[i] = SOLUTION(self.nextId)
             self.nextId += 1
 
@@ -17,35 +17,41 @@ class PARALLEL_HILL_CLIMBER:
         numberOfGenerations = 50
         for currentGeneration in range(numberOfGenerations):
             print("------------------------------------------" + str(currentGeneration))
-            self.Evolve_For_One_Generation()
-        
+            ps = []
+            for gen in self.parents:
+                ps.append(self.parents[gen])
+
+            ps.sort(key=lambda x: x.fitness, reverse=True)
+            for i in range(int(self.populationSize/4)):
+                self.Evolve_For_One_Generation(i, ps[0])
+                self.Evolve_For_One_Generation(int(self.populationSize/4)+1, ps[1])
+                self.Evolve_For_One_Generation(int(2*self.populationSize/4)+1, ps[2])
+                self.Evolve_For_One_Generation(int(3*self.populationSize/4)+1, ps[3])
+                
         mx = -999
         for i in self.parents:
             mx = max(mx, self.parents[i].fitness)
 
         for i in self.parents:
             if self.parents[i].fitness == mx: 
+                x = input("prompt")
                 self.parents[i].Evaluate(True)
 
-    def Evolve_For_One_Generation(self):
-        self.Spawn()
-        self.Mutate()
-        for i in self.parents:
-            self.children[i].Evaluate(False)
+    def Evolve_For_One_Generation(self, id, parent):
+        self.Spawn(id, parent)
+        self.Mutate(id)
+        self.children[id].Evaluate(False)
 
-        for i in self.parents:
-            print("Parents Fitness: " + str(self.parents[i].fitness) + ", Child's Fitness: " + str(self.children[i].fitness))
-        self.Select()
+        print("Parents Fitness: " + str(parent.fitness) + ", Child's Fitness: " + str(self.children[id].fitness))
+        self.Select(id)
 
-    def Spawn(self):
-        for i in self.parents:
-            self.children[i] = copy.deepcopy(self.parents[i])
+    def Spawn(self, id, parent):
+        self.children[id] = copy.deepcopy(parent)
+        self.children[id].id = id
 
-    def Mutate(self):
-        for i in self.parents:
-            self.children[i].Mutate()
+    def Mutate(self,id):
+        self.children[id].Mutate()
 
-    def Select(self):
-        for i in self.parents:
-            if self.children[i].fitness > self.parents[i].fitness:
-                self.parents[i] = self.children[i]
+    def Select(self, id):
+        if abs(self.children[id].fitness) > abs(self.parents[id].fitness):
+            self.parents[id] = self.children[id]
