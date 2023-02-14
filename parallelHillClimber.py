@@ -34,7 +34,7 @@ class PARALLEL_HILL_CLIMBER:
 
         for i in self.parents:
             if self.parents[i].fitness == mx: 
-                x = input("prompt")
+                # x = input("prompt")
                 self.parents[i].Evaluate(True)
 
     def Evolve_For_One_Generation(self, id, parent):
