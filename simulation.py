@@ -17,6 +17,8 @@ class SIMULATION:
         if gui: 
             self.physicsClient = p.connect(p.GUI)
             p.configureDebugVisualizer(p.COV_ENABLE_GUI,0)
+            p.resetDebugVisualizerCamera( cameraDistance=5, cameraYaw=30, cameraPitch=-45, cameraTargetPosition=[0,0,0])
+
 
 
         else:

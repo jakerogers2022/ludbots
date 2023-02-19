@@ -3,6 +3,13 @@ import pyrosim.pyrosim as pyrosim
 import random
 from simulate import Simulate
 
+class Node():
+    def __init__(self, parent, nodes):
+        self.dimensions= numpy.random.rand(1, 3)
+        self.sensor = random.random() > 0.5
+        self.NumChildren = random.randint(0, 3)
+        self.children=[]        
+
 
 class SOLUTION:
     def __init__(self, id):
@@ -68,6 +75,7 @@ class SOLUTION:
 
         pyrosim.End()
 
+
     def Create_Body(self):
         pyrosim.Start_URDF("./bodies/body" + str(self.id) + ".urdf")
 
@@ -77,6 +85,10 @@ class SOLUTION:
 
         pyrosim.Send_Cube(name="L0", pos=[0,0,1] , size=[self.body[0][0], self.body[1][0], self.body[2][0]], color=color)
         pyrosim.Send_Joint(name = "L0_L1", parent= "L0" , child = "L1" , type = "revolute", position = [0,self.body[1][0]/2,1], jointAxis = "1 0 0")
+
+        body = Node()
+
+
         # pyrosim.Send_Joint(name = "L0_L1", parent= "L0" , child = "L1" , type = "revolute", position = [0,self.body[1][0]/2,1], jointAxis = "0 1 0")
 
         for i in range(1,len(self.body[0][:])-1):
@@ -101,14 +113,16 @@ class SOLUTION:
 
 
 
-        for i in range(self.length-1):
-            pyrosim.Send_Sensor_Neuron(name = i , linkName = "L" + str(i))
-            pyrosim.Send_Motor_Neuron( name = i + 2*self.length , jointName = "L"+str(i)+"_L" + str(i+1))
+        # for i in range(self.length-1):
+        #     if self.body[3][i] < 0.5:
+        #         pyrosim.Send_Sensor_Neuron(name = i , linkName = "L" + str(i))
+        #     pyrosim.Send_Motor_Neuron( name = i + 2*self.length , jointName = "L"+str(i)+"_L" + str(i+1))
 
 
-        for i in range(self.length):
-            for j in range(self.length, self.length * 2):
-                pyrosim.Send_Synapse(sourceNeuronName=i, targetNeuronName=j, weight=self.weights[i+j])
+        # for i in range(self.length):
+        #     if self.body[3][i] < 0.5:
+        #         for j in range(self.length, self.length * 2):
+        #             pyrosim.Send_Synapse(sourceNeuronName=i, targetNeuronName=j, weight=self.weights[i+j])
 
         # for i in range(self.numRight):
         #     j = i + 3*self.numLeft
