@@ -32,7 +32,7 @@ class SIMULATION:
         self.robot = ROBOT(id)
 
     def Run(self):
-        for i in range(200):
+        for i in range(1000):
             p.stepSimulation()
             self.robot.Sense(i)
             self.robot.Think()
