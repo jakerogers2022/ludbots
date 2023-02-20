@@ -217,13 +217,13 @@ class SOLUTION:
         for i in allSensorNames:
             pyrosim.Send_Sensor_Neuron(name = i+"x" , linkName = i)
 
-        for i in allSensorNames:
+        for i in allJointNames:
             pyrosim.Send_Motor_Neuron( name = i+"x", jointName = i)
 
 
         for i in allSensorNames:
             for j in allJointNames:
-                pyrosim.Send_Synapse(sourceNeuronName=i+"syn", targetNeuronName=j, weight=random.random() *2-1)
+                pyrosim.Send_Synapse(sourceNeuronName=i+"x", targetNeuronName=j+"x", weight=random.random() *2-1)
 
 
 
