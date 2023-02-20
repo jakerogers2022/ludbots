@@ -1,23 +1,13 @@
 # ludbots
 CS 396 Artificial Life
 
-# Assignment 5 "The Nped"
+# Assignment 7 "The Creature"
 
-# OVERVIEW: For this assignment I created a milliped like creature that evolved to walk.
-The aspects being evolved are:
-- Length of the body
-- Number of legs on the left side
-- Number of legs on the right side
-- The weights of the neurons connecting the sensors to the motors
+# OVERVIEW: For this assignment I created a creature with a randomly generated creature
 
-# Fitness function:
-The fitness funtion used to evaluate the ability of the bots is the absolute value of the distance from the origin in the y direction.
+The creature is generated using a tree like structure.
 
-# Evolution Method:
-I switched the evolution method away from parallel hill climbing to a more pool based evolution method.
-For this I evaluated all parents and then selected the top 4 to reproduce all the children.
-
-40 Parents -> Top 4 selected -> 10 children each -> Evaluate Children -> Replace parents if children do better -> Repeat
+![image](https://user-images.githubusercontent.com/71994929/219984596-b5018e4c-8165-41f3-bbaa-cbcd474611e7.png)
 
 # Findings:
 Some interesting findings were:
