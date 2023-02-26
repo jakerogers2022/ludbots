@@ -1,0 +1,3 @@
+<neuralNetwork>
+    <neuron name = "rootLinkx" type = "sensor" linkName = "rootLink" />
+</neuralNetwork>

@@ -1,0 +1,5 @@
+<neuralNetwork>
+    <neuron name = "rootLinkx" type = "sensor" linkName = "rootLink" />
+    <neuron name = "rootLink_rootLink0x" type = "motor"  jointName = "rootLink_rootLink0" />
+    <synapse sourceNeuronName = "rootLinkx" targetNeuronName = "rootLink_rootLink0x" weight = "0.9686633654574681" />
+</neuralNetwork>

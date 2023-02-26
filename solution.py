@@ -17,10 +17,16 @@ class Node():
         self.absBodyPos = absBodyPos
         self.depth = depth
         self.joints = []
+        self.bodyPos = bodyPos
+
+        self.childJoints = []
 
         color = "Green"
         if self.sensor:
             color="Blue"
+
+        self.color = color
+
 
         pyrosim.Send_Cube(name=name, pos=bodyPos, size=dimensions, color=color)
 
@@ -28,10 +34,11 @@ class Node():
         self.absPosRanges = absPosRanges
         self.children= []  
 
-        hasChildren = random.random() > float(depth)/7
-        if hasChildren or depth <= 2:
+        self.hasChildren = random.random() > float(depth)/10
+        if self.hasChildren or depth <= 4:
             self.NumChildren = random.randint(1, 5)
             growDirs = []
+
             for i in range(self.NumChildren):
             # for i in range(2):
                 jointDirection = jointDirections[random.randint(0,2)]
@@ -44,7 +51,7 @@ class Node():
 
                     # growAxis = 2
 
-                    growDirections = [1, 1]
+                    growDirections = [-1, 1]
                     gd = growDirections[random.randint(0, 1)]
                     childJointPosition = copy.deepcopy(bodyPos)
                     childJointPosition[growAxis] += gd * dimensions[growAxis] /2
@@ -52,16 +59,19 @@ class Node():
                     childDimensions = [1,1,1]#numpy.random.rand(1, 3).tolist()[0]
                     childDimensions[growAxis] += random.random()
                     childBodyPos = [0,0,0]
-                    childBodyPos[growAxis] += childDimensions[growAxis]/2
+                    childBodyPos[growAxis] += gd*childDimensions[growAxis]/2
 
 
                     childAbsPos = self.calcAbsPos(absBodyPos, growAxis, dimensions, childDimensions, gd)
 
                     childAbsRanges = self.calcAbsRanges(childAbsPos, childDimensions)
 
-                    if self.checkIfNodeIsValid(childAbsRanges):
+                    
+
+                    if min(childAbsRanges[2]) > 0 and self.checkIfNodeIsValid(childAbsRanges):
                         childName = name + str(i)
                         pyrosim.Send_Joint(name = name + "_" + childName, parent=name , child = childName , type = "revolute", position = childJointPosition, jointAxis = jointDirection)
+                        self.childJoints.append({"name": name + "_" + childName, "parent": name, "child": childName, "position": childJointPosition, "jointAxis": jointDirection})
                         self.joints.append(name + "_" + childName)
                         child = Node(childBodyPos, childAbsRanges, childDimensions, childName, childAbsPos, depth+1)
                         self.children.append(child)
@@ -75,7 +85,7 @@ class Node():
     
     def calcAbsPos(self, absBodyPos, growAxis, dims, childDims, growDirection):
         val = copy.deepcopy(absBodyPos)
-        val[growAxis] += dims[growAxis]/2 + growDirection * childDims[growAxis]/2
+        val[growAxis] += growDirection * dims[growAxis]/2 + growDirection * childDims[growAxis]/2
         return val
 
     def checkIfNodeIsValid(self, childAbsPosRanges):
@@ -88,6 +98,60 @@ class Node():
                     return False
 
         return True
+    
+    def rebuildLikeInit(self):
+        global nodes
+        nodes.append(self)
+
+
+        self.sensor = self.sensor
+
+
+        pyrosim.Send_Cube(name=self.name, pos=self.bodyPos, size=self.dimensions, color=self.color)
+
+        jointDirections = ['0 0 1','1 0 0', '0 1 0']
+        self.children= []  
+
+        # self.hasChildren = random.random() > float(self.depth)/10
+        
+        if self.hasChildren or self.depth <= 4:
+            # self.NumChildren = random.randint(1, 5)
+            growDirs = []
+            for i in range(len(self.children)):
+            # for i in range(2):
+                jointDirection = jointDirections[random.randint(0,2)]
+
+                growAxis = random.randint(0,2)
+
+                if growAxis not in growDirs:
+
+                    growDirs.append(growAxis)
+
+                    # growAxis = 2
+
+                    growDirections = [-1, 1]
+                    gd = growDirections[random.randint(0, 1)]
+                    childJointPosition = copy.deepcopy(self.bodyPos)
+                    childJointPosition[growAxis] += gd * self.dimensions[growAxis] /2
+
+                    childDimensions = [1,1,1]#numpy.random.rand(1, 3).tolist()[0]
+                    childDimensions[growAxis] += random.random()
+                    childBodyPos = [0,0,0]
+                    childBodyPos[growAxis] += gd*childDimensions[growAxis]/2
+
+
+                    childAbsPos = self.calcAbsPos(self.absBodyPos, growAxis, self.dimensions, childDimensions, gd)
+
+                    childAbsRanges = self.calcAbsRanges(childAbsPos, childDimensions)
+
+                    if min(childAbsRanges[2]) > 0 and self.checkIfNodeIsValid(childAbsRanges):
+                        childName = self.name + str(i)
+                        pyrosim.Send_Joint(name = self.name + "_" + childName, parent=self.name , child = childName , type = "revolute", position = childJointPosition, jointAxis = jointDirection)
+                        self.childJoints.append({"name": self.name + "_" + childName, "parent": self.name, "child": childName, "position": childJointPosition, "jointAxis": jointDirection})
+                        self.joints.append(self.name + "_" + childName)
+                        self.children[i].rebuildLikeInit()
+                        
+
 
 
 class SOLUTION:
@@ -99,6 +163,7 @@ class SOLUTION:
         # self.body[:3][:] *= 2
 
         self.body = None
+        self.weights = []
 
         # # self.body = numpy.ones((4,5))
         # # self.body[0][:] = 3
@@ -127,11 +192,18 @@ class SOLUTION:
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
-        Simulate(gui, self.id)
-        with open('./fitness/fitness'+ str(self.id) +'.txt', 'r') as file:
-            self.fitness = float(file.read())
+        if self.c < 2:
+            self.fitness = 0
+        else:
+            Simulate(gui, self.id)
+            with open('./fitness/fitness'+ str(self.id) +'.txt', 'r') as file:
+                self.fitness = float(file.read())
 
     def Mutate(self):
+        i = random.randint(0,len(self.weights)-1)
+
+        self.weights[i] = random.random() * 2 - 1
+
         i = random.randint(0,len(self.weights)-1)
 
         self.weights[i] = random.random() * 2 - 1
@@ -159,6 +231,7 @@ class SOLUTION:
 
     def Create_Body(self):
         pyrosim.Start_URDF("./bodies/body" + str(self.id) + ".urdf")
+        global nodes
 
         # color = "Green"
         # if self.body[3][0] > 0.5:
@@ -166,12 +239,37 @@ class SOLUTION:
 
         # pyrosim.Send_Cube(name="Body", pos=[0,0,1] , size=[self.body[0][0], self.body[1][0], self.body[2][0]], color=color)
         # pyrosim.Send_Joint(name = "L0_L1", parent= "L0" , child = "L1" , type = "revolute", position = [0,self.body[1][0]/2,1], jointAxis = "1 0 0")
-        body = Node([0,0,0.5],  [[-0.5, 0.5],[-0.5, 0.5],[0, 1]], [1,1,1], "rootLink", [0,0,0.5], 1)
+        if self.body and random.random() < 0.2:
+            curNode = self.body
+            curNode.rebuildLikeInit()
 
-        self.body = body
+            nodes = []
 
-        global nodes
-        nodes = []
+        
+        
+        elif not self.body:
+            body = Node([0,0,0.5],  [[-0.5, 0.5],[-0.5, 0.5],[0, 1]], [1,1,1], "rootLink", [0,0,0.5], 1)
+
+            self.body = body
+
+            nodes = []
+        
+        else:
+            curNode = self.body
+            nodeStack = []
+
+
+            while True:
+                pyrosim.Send_Cube(name=curNode.name, pos=curNode.bodyPos, size=curNode.dimensions, color=curNode.color)
+
+                for childJoint in curNode.childJoints:
+                    pyrosim.Send_Joint(name = childJoint["name"], parent=childJoint["parent"] , child = childJoint["child"] , type = "revolute", position = childJoint["position"], jointAxis = childJoint["jointAxis"])
+                       
+                nodeStack.extend(curNode.children)
+                if len(nodeStack) == 0:
+                    break
+                else:
+                    curNode = nodeStack.pop()
         # pyrosim.Send_Joint(name = "L0_L1", parent= "L0" , child = "L1" , type = "revolute", position = [0,self.body[1][0]/2,1], jointAxis = "0 1 0")
 
         # for i in range(1,len(self.body[0][:])-1):
@@ -221,9 +319,18 @@ class SOLUTION:
             pyrosim.Send_Motor_Neuron( name = i+"x", jointName = i)
 
 
+        if len(self.weights) == 0:
+            for i in allSensorNames:
+                for j in allJointNames:
+                    self.weights.append(random.random() *2-1)
+
+            self.weights.append(random.random() *2-1)
+
+        self.c = 0
         for i in allSensorNames:
             for j in allJointNames:
-                pyrosim.Send_Synapse(sourceNeuronName=i+"x", targetNeuronName=j+"x", weight=random.random() *2-1)
+                pyrosim.Send_Synapse(sourceNeuronName=i+"x", targetNeuronName=j+"x", weight=self.weights[self.c])
+                self.c += 1
 
 
 
