@@ -31,7 +31,7 @@ class ROBOT:
     def Act(self, t):
         for neuronName in self.nn.Get_Neuron_Names():
             if self.nn.Is_Motor_Neuron(neuronName):
-                desiredAngle = self.nn.Get_Value_Of(neuronName)
+                desiredAngle = self.nn.Get_Value_Of(neuronName)/2
                 jointName = self.nn.Get_Motor_Neurons_Joint(neuronName)
                 self.motors[bytes(jointName,'UTF-8')].Set_Value(self.robotId, desiredAngle)
 
@@ -42,5 +42,6 @@ class ROBOT:
     def Get_Fitness(self, id):
         print("getting fitness")
         with open('./fitness/fitness' + str(id) + '.txt', 'w') as file:
-            file.write(str( abs(p.getBasePositionAndOrientation(self.robotId)[0][1])))
+            xy = p.getBasePositionAndOrientation(self.robotId)[0][0]**2 + p.getBasePositionAndOrientation(self.robotId)[0][1]**2 #+ p.getBasePositionAndOrientation(self.robotId)[0][2]**2
+            file.write(str(xy))
 
