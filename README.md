@@ -18,6 +18,7 @@ https://www.youtube.com/watch?v=Y-U4JQICveE
 # Fitness function:
 The fitness funtion used to evaluate the ability of the bots is the absolute value of the distance from the origin in the x, y plane.
 
+      Top fitness in population of 200 over 50 generations
 ![image](https://user-images.githubusercontent.com/71994929/221426053-0b7bc239-a616-4cff-a54f-e520d88a7fce.png)
 
 # Evolution Method:
