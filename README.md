@@ -29,8 +29,7 @@ Two weights in the brain are randomly changed
 ![image](https://user-images.githubusercontent.com/71994929/221658858-36d37d13-561e-4f9b-9ac7-201b0cbff512.png)
 
 And there is a 20% chance new nodes are added or removed or both to the existing creature
-![image](https://user-images.githubusercontent.com/71994929/221659760-d1bd7afb-3f49-4480-84a0-4970c67ccd49.png)
-
+![image](https://user-images.githubusercontent.com/71994929/221660146-93e3dbc3-34d6-4e8b-b442-5014139a1bf1.png)
 
 # Fitness function:
 The fitness funtion used to evaluate the ability of the bots is the absolute value of the distance from the origin in the x, y plane.
