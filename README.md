@@ -11,6 +11,10 @@ The aspects being evolved are:
 - The placement and number of sensors
 - The weighted connections in the brain
 
+Video result
+https://www.youtube.com/watch?v=Y-U4JQICveE
+
+
 # Fitness function:
 The fitness funtion used to evaluate the ability of the bots is the absolute value of the distance from the origin in the x, y plane.
 
