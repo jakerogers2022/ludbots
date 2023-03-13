@@ -63,10 +63,10 @@ Fitness plots for each of the three methods
 
 # Analysis
 ![image](https://user-images.githubusercontent.com/71994929/224790007-2438abf9-841a-4d46-9388-9cb66f92232c.png)
-In order to determine the effectiveness of the three evolution algorithms I plotted the average fitness for each method at each generation across the 10 trials. It is clear from these results that parallel top k is much less effective than both parallel hill climber and top k. The comparison between TK and PHC is more interesting though. The top k method is much faster at initially achieving high fitness levels, but the parallel hill climber has a more gradual but steady improvement in performance.
+In order to determine the effectiveness of the three evolution algorithms I plotted the average fitness for each method at each generation across the 10 trials.
 
 # Conclusion
-Parallel hill climber is the best evolutionary algorithm over the long term, but in situations with limited time or compute power, top k will outperform.
+
 
 # Run it yourself
 - Clone repo
