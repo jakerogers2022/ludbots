@@ -53,10 +53,9 @@ The tree is generated recursively. Given a link it creates a random number of ch
 # Fitness function
 The fitness funtion used to evaluate the ability of the bots is the absolute value of the distance from the origin in the x, y plane.
 
-![image](https://user-images.githubusercontent.com/71994929/221426053-0b7bc239-a616-4cff-a54f-e520d88a7fce.png)
-
 # Results
-Fitness plots for each of the three methods
+Fitness plots for each of the three methods \n
+
 ![image](https://user-images.githubusercontent.com/71994929/224786653-cc20cd06-9d6d-4314-834b-1f61c5b7ee95.png)
 ![image](https://user-images.githubusercontent.com/71994929/224786709-5b68878f-ca64-44ce-aa13-ba01dc41d4a2.png)
 ![image](https://user-images.githubusercontent.com/71994929/224786771-8f3b67a7-e6b1-430e-b30d-b40498942e32.png)
