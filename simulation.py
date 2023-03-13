@@ -16,6 +16,10 @@ class SIMULATION:
 
         if gui: 
             self.physicsClient = p.connect(p.GUI)
+            p.configureDebugVisualizer(p.COV_ENABLE_GUI,0)
+            p.resetDebugVisualizerCamera( cameraDistance=8, cameraYaw=70, cameraPitch=-40, cameraTargetPosition=[0,0,0])
+
+
 
         else:
             self.physicsClient = p.connect(p.DIRECT)
@@ -28,7 +32,7 @@ class SIMULATION:
         self.robot = ROBOT(id)
 
     def Run(self):
-        for i in range(1000):
+        for i in range(500):
             p.stepSimulation()
             self.robot.Sense(i)
             self.robot.Think()
