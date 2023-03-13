@@ -31,10 +31,30 @@ import warnings
 #     warnings.simplefilter("ignore")
 #     phc.Evolve()  
 
-phc = PARALLEL_HILL_CLIMBER(7)
-with warnings.catch_warnings():
-    warnings.simplefilter("ignore")
-    phc.Evolve()  
+# phc = PARALLEL_HILL_CLIMBER(22)
+# with warnings.catch_warnings():
+#     warnings.simplefilter("ignore")
+#     phc.Evolve()  
+
+for i in range(10):
+    phc = PARALLEL_HILL_CLIMBER(i, "phc")
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        phc.Evolve()
+
+for i in range(10):
+    phc = PARALLEL_HILL_CLIMBER(i, "TopK")
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        phc.Evolve()
+
+for i in range(10):
+    phc = PARALLEL_HILL_CLIMBER(i, "PTK")
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        phc.Evolve()  
+
+
 
 
 

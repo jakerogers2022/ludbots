@@ -21,9 +21,9 @@ class Node():
 
         self.childJoints = []
 
-        color = "Green"
+        color = "Blue"
         if self.sensor:
-            color="Blue"
+            color="Green"
 
         self.color = color
 
@@ -35,7 +35,7 @@ class Node():
         self.children= []  
 
         self.hasChildren = random.random() > float(depth)/10
-        if self.hasChildren or depth <= 4:
+        if self.hasChildren or depth <= 3:
             self.NumChildren = random.randint(1, 5)
             growDirs = []
 
@@ -114,7 +114,7 @@ class Node():
 
         # self.hasChildren = random.random() > float(self.depth)/10
         
-        if self.hasChildren or self.depth <= 4:
+        if self.hasChildren or self.depth <= 3:
             # self.NumChildren = random.randint(1, 5)
             growDirs = []
             for i in range(len(self.children)):
@@ -192,8 +192,13 @@ class SOLUTION:
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
-        if self.c < 2:
-            self.fitness = 0
+        while self.c < 2:
+            self.weights = []
+            self.body = None
+            self.Create_Body()
+            self.Create_Brain()
+        # if self.c < 3:
+        #     self.fitness = 0
         else:
             Simulate(gui, self.id)
             with open('./fitness/fitness'+ str(self.id) +'.txt', 'r') as file:
@@ -239,15 +244,15 @@ class SOLUTION:
 
         # pyrosim.Send_Cube(name="Body", pos=[0,0,1] , size=[self.body[0][0], self.body[1][0], self.body[2][0]], color=color)
         # pyrosim.Send_Joint(name = "L0_L1", parent= "L0" , child = "L1" , type = "revolute", position = [0,self.body[1][0]/2,1], jointAxis = "1 0 0")
-        if self.body and random.random() < 0.2:
-            curNode = self.body
-            curNode.rebuildLikeInit()
+        # if self.body and random.random() < 0.2:
+        #     curNode = self.body
+        #     curNode.rebuildLikeInit()
 
-            nodes = []
+        #     nodes = []
 
         
         
-        elif not self.body:
+        if not self.body:
             body = Node([0,0,0.5],  [[-0.5, 0.5],[-0.5, 0.5],[0, 1]], [1,1,1], "rootLink", [0,0,0.5], 1)
 
             self.body = body

@@ -1,2 +1,21 @@
 <neuralNetwork>
+    <neuron name = "rootLinkx" type = "sensor" linkName = "rootLink" />
+    <neuron name = "rootLink00x" type = "sensor" linkName = "rootLink00" />
+    <neuron name = "rootLink000x" type = "sensor" linkName = "rootLink000" />
+    <neuron name = "rootLink_rootLink0x" type = "motor"  jointName = "rootLink_rootLink0" />
+    <neuron name = "rootLink0_rootLink00x" type = "motor"  jointName = "rootLink0_rootLink00" />
+    <neuron name = "rootLink00_rootLink000x" type = "motor"  jointName = "rootLink00_rootLink000" />
+    <neuron name = "rootLink000_rootLink0000x" type = "motor"  jointName = "rootLink000_rootLink0000" />
+    <synapse sourceNeuronName = "rootLinkx" targetNeuronName = "rootLink_rootLink0x" weight = "-0.07504071697396042" />
+    <synapse sourceNeuronName = "rootLinkx" targetNeuronName = "rootLink0_rootLink00x" weight = "-0.7284946817986753" />
+    <synapse sourceNeuronName = "rootLinkx" targetNeuronName = "rootLink00_rootLink000x" weight = "-0.9176066817132533" />
+    <synapse sourceNeuronName = "rootLinkx" targetNeuronName = "rootLink000_rootLink0000x" weight = "0.24895021020106145" />
+    <synapse sourceNeuronName = "rootLink00x" targetNeuronName = "rootLink_rootLink0x" weight = "0.29101398840323944" />
+    <synapse sourceNeuronName = "rootLink00x" targetNeuronName = "rootLink0_rootLink00x" weight = "-0.6979592082071451" />
+    <synapse sourceNeuronName = "rootLink00x" targetNeuronName = "rootLink00_rootLink000x" weight = "-0.5846211519829136" />
+    <synapse sourceNeuronName = "rootLink00x" targetNeuronName = "rootLink000_rootLink0000x" weight = "0.7773607201539838" />
+    <synapse sourceNeuronName = "rootLink000x" targetNeuronName = "rootLink_rootLink0x" weight = "-0.016292032438311788" />
+    <synapse sourceNeuronName = "rootLink000x" targetNeuronName = "rootLink0_rootLink00x" weight = "0.7601248673488157" />
+    <synapse sourceNeuronName = "rootLink000x" targetNeuronName = "rootLink00_rootLink000x" weight = "-0.6243122775282952" />
+    <synapse sourceNeuronName = "rootLink000x" targetNeuronName = "rootLink000_rootLink0000x" weight = "-0.7854911258263011" />
 </neuralNetwork>

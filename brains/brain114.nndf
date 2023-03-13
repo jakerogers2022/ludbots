@@ -1,33 +1,7 @@
 <neuralNetwork>
     <neuron name = "rootLinkx" type = "sensor" linkName = "rootLink" />
-    <neuron name = "rootLink0002x" type = "sensor" linkName = "rootLink0002" />
-    <neuron name = "rootLink000001x" type = "sensor" linkName = "rootLink000001" />
     <neuron name = "rootLink_rootLink0x" type = "motor"  jointName = "rootLink_rootLink0" />
-    <neuron name = "rootLink0_rootLink00x" type = "motor"  jointName = "rootLink0_rootLink00" />
-    <neuron name = "rootLink00_rootLink000x" type = "motor"  jointName = "rootLink00_rootLink000" />
-    <neuron name = "rootLink000_rootLink0000x" type = "motor"  jointName = "rootLink000_rootLink0000" />
-    <neuron name = "rootLink000_rootLink0002x" type = "motor"  jointName = "rootLink000_rootLink0002" />
-    <neuron name = "rootLink0000_rootLink00000x" type = "motor"  jointName = "rootLink0000_rootLink00000" />
-    <neuron name = "rootLink00000_rootLink000001x" type = "motor"  jointName = "rootLink00000_rootLink000001" />
-    <synapse sourceNeuronName = "rootLinkx" targetNeuronName = "rootLink_rootLink0x" weight = "-0.7170362905665666" />
-    <synapse sourceNeuronName = "rootLinkx" targetNeuronName = "rootLink0_rootLink00x" weight = "0.5332474181043592" />
-    <synapse sourceNeuronName = "rootLinkx" targetNeuronName = "rootLink00_rootLink000x" weight = "-0.6931775394434287" />
-    <synapse sourceNeuronName = "rootLinkx" targetNeuronName = "rootLink000_rootLink0000x" weight = "0.4118091462448723" />
-    <synapse sourceNeuronName = "rootLinkx" targetNeuronName = "rootLink000_rootLink0002x" weight = "-0.8596248954160486" />
-    <synapse sourceNeuronName = "rootLinkx" targetNeuronName = "rootLink0000_rootLink00000x" weight = "-0.7774822173317621" />
-    <synapse sourceNeuronName = "rootLinkx" targetNeuronName = "rootLink00000_rootLink000001x" weight = "-0.389640062992602" />
-    <synapse sourceNeuronName = "rootLink0002x" targetNeuronName = "rootLink_rootLink0x" weight = "-0.28799508617350833" />
-    <synapse sourceNeuronName = "rootLink0002x" targetNeuronName = "rootLink0_rootLink00x" weight = "0.8115032062022887" />
-    <synapse sourceNeuronName = "rootLink0002x" targetNeuronName = "rootLink00_rootLink000x" weight = "0.5318460377033694" />
-    <synapse sourceNeuronName = "rootLink0002x" targetNeuronName = "rootLink000_rootLink0000x" weight = "-0.38374055101314664" />
-    <synapse sourceNeuronName = "rootLink0002x" targetNeuronName = "rootLink000_rootLink0002x" weight = "0.3883386428599229" />
-    <synapse sourceNeuronName = "rootLink0002x" targetNeuronName = "rootLink0000_rootLink00000x" weight = "0.8829024096037144" />
-    <synapse sourceNeuronName = "rootLink0002x" targetNeuronName = "rootLink00000_rootLink000001x" weight = "-0.7237657514761864" />
-    <synapse sourceNeuronName = "rootLink000001x" targetNeuronName = "rootLink_rootLink0x" weight = "-0.7332376057353729" />
-    <synapse sourceNeuronName = "rootLink000001x" targetNeuronName = "rootLink0_rootLink00x" weight = "-0.9777942829079711" />
-    <synapse sourceNeuronName = "rootLink000001x" targetNeuronName = "rootLink00_rootLink000x" weight = "0.6421760916351009" />
-    <synapse sourceNeuronName = "rootLink000001x" targetNeuronName = "rootLink000_rootLink0000x" weight = "0.1790988996643006" />
-    <synapse sourceNeuronName = "rootLink000001x" targetNeuronName = "rootLink000_rootLink0002x" weight = "-0.8448429766303045" />
-    <synapse sourceNeuronName = "rootLink000001x" targetNeuronName = "rootLink0000_rootLink00000x" weight = "0.0002485737582116343" />
-    <synapse sourceNeuronName = "rootLink000001x" targetNeuronName = "rootLink00000_rootLink000001x" weight = "-0.026692012720764602" />
+    <neuron name = "rootLink0_rootLink01x" type = "motor"  jointName = "rootLink0_rootLink01" />
+    <synapse sourceNeuronName = "rootLinkx" targetNeuronName = "rootLink_rootLink0x" weight = "-0.46670295070631895" />
+    <synapse sourceNeuronName = "rootLinkx" targetNeuronName = "rootLink0_rootLink01x" weight = "0.682914770943468" />
 </neuralNetwork>
