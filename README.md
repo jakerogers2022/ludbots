@@ -99,11 +99,13 @@ P-value: 0.027506456999200138
 Given the high F value and low P value we can also say there is a difference in the final performance of the algorithms after 50 trials.
 
 # Conclusion
-From the analysis above we can conclude that there is a significant difference in the performance of the evolutionary algorithms both in there performance throughout the 50 generations and in there final performance at the end of the 50 generations.
+From the analysis above we can conclude that there is a significant difference in the performance of the evolutionary algorithms both in there performance throughout the 50 generations and in there final performance at the end of the 50 generations. The clear winner is the parallel top k method of evolution and there is some intuition on why this would be. The advantage of TK over PHC is that TK increases fitness faster the PHC initially since each iteration it makes many offspring of the top couple creatures. This means every generation it will probably get a new best one. Whereas the PHC the current best creature only has one chance to produce a better version. TK has the downside though of eventually having all top k creatures being very similar since chances are small changes in the best version will probably also produce a very good version. This means that there is not much hope for creatures that take longer to evolve to last. This is why the final performance of the PHC is better than TK. PTK kind of combines the best aspects of both of these methods by isolating sections of the population. This allows creatures that would take longer to evolve but eventually do better to last.
 
 # Run it yourself
 - Clone repo
 - Install packages
+- In search.py specify the desired population size and number of generations as well as the K value for top k evolution.
+    - POPULATION_SIZE must be divisible by K for TopK
 - Run search.py
 
 # Sources: https://www.reddit.com/r/ludobots/
