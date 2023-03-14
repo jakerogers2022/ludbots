@@ -76,8 +76,11 @@ Fitness plots for each of the three methods
 In order to determine the effectiveness of the three evolution algorithms I plotted the average fitness for each method at each generation across the 10 trials. As evident from the graph parallel top k performs the best by a significant margin. Top K outperforms the hillclimber initially but after many generations the PHC starts to do better. All three exhibit logarithmic growth with Top K flattening out more than the other methods.
 
 ![image](https://user-images.githubusercontent.com/71994929/225123548-4c566354-9d32-4dec-8d74-77a06db25749.png)
+
 Here is a plot of the max fitness values at each generation across all 10 trials and 50 generations for each evolution method.
+
 The corresponding F and P values are as follows:
+
 F-value: 127.44076719837632
 P-value: 7.766465412549422e-52
 
@@ -86,8 +89,10 @@ Given the high F value and Extremely low P value we can be confident in saying o
 We also will compare the final fitness values of each trail for each algorithm.
 
 ![image](https://user-images.githubusercontent.com/71994929/225124635-5554e5af-c3e7-4856-9946-36dd4ff2d3f3.png)
+
 Here is a plot of the max fitness values for each of the 10 trials for each evolution method.
 The corresponding F and P values are as follows:
+
 F-value: 4.1169694621203865
 P-value: 0.027506456999200138
 
