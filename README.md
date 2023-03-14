@@ -59,10 +59,10 @@ Fitness plots for each of the three methods
 
 ![image](https://user-images.githubusercontent.com/71994929/224786653-cc20cd06-9d6d-4314-834b-1f61c5b7ee95.png)
 ![image](https://user-images.githubusercontent.com/71994929/224786709-5b68878f-ca64-44ce-aa13-ba01dc41d4a2.png)
-![image](https://user-images.githubusercontent.com/71994929/224786771-8f3b67a7-e6b1-430e-b30d-b40498942e32.png)
-
+![image](https://user-images.githubusercontent.com/71994929/224863706-8e1a474f-ad99-4225-9964-e39ed691ce05.png)
 # Analysis
-![image](https://user-images.githubusercontent.com/71994929/224790007-2438abf9-841a-4d46-9388-9cb66f92232c.png)
+![image](https://user-images.githubusercontent.com/71994929/224863751-9422a564-45e6-48e3-b742-d2f01ea2ff03.png)
+
 In order to determine the effectiveness of the three evolution algorithms I plotted the average fitness for each method at each generation across the 10 trials.
 
 # Conclusion
