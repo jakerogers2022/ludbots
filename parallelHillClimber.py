@@ -2,14 +2,17 @@ from solution import SOLUTION
 import copy
 
 class PARALLEL_HILL_CLIMBER:
-    def __init__(self, i, evolutionMethod):
+    def __init__(self, i, evolutionMethod, populationSize, genNum, gui = False, topk = 10):
         self.evalMethod = evolutionMethod
 
         self.xi = i
-        self.populationSize = 200
+        self.populationSize = populationSize
+        self.numberOfGenerations = genNum
+        self.topK = topk
         self.parents = {}
         self.children = {}
         self.nextId = 0
+        self.gui = gui
         for i in range(self.populationSize):
             self.parents[i] = SOLUTION(self.nextId)
             self.nextId += 1
@@ -17,7 +20,7 @@ class PARALLEL_HILL_CLIMBER:
     def Evolve(self):
         for i in self.parents:
             self.parents[i].Evaluate(False)
-        numberOfGenerations = 50
+        numberOfGenerations = self.numberOfGenerations
         for currentGeneration in range(numberOfGenerations):
             print("------------------------------------------" + str(currentGeneration))
 
@@ -27,7 +30,7 @@ class PARALLEL_HILL_CLIMBER:
                     ps.append(self.parents[gen])
 
                 ps.sort(key=lambda x: x.fitness, reverse=True)
-                with open("fitnessDataPHC"+str(self.xi), "a") as f:
+                with open("fitnessDataPHCxx"+str(self.xi), "a") as f:
                     f.write(str(ps[0].fitness)+",")
 
                 for i in range(self.populationSize):
@@ -39,20 +42,23 @@ class PARALLEL_HILL_CLIMBER:
                     ps.append(self.parents[gen])
 
                 ps.sort(key=lambda x: x.fitness, reverse=True)
-                with open("fitnessDataTK"+str(self.xi), "a") as f:
+                with open("fitnessDataTKxx"+str(self.xi), "a") as f:
                     f.write(str(ps[0].fitness)+",")
 
-                topK = 10
+                topK = self.topK
                 for i in range(int(self.populationSize/topK)):
                     for k in range(topK):
                         self.Evolve_For_One_Generation(i + k * int(self.populationSize/topK), ps[k])
             else:
                 ps = []
+                ps2 = []
                 for gen in self.parents:
                     ps.append(self.parents[gen])
+                    ps2.append(self.parents[gen])
 
-                with open("fitnessDataPTK"+str(self.xi), "a") as f:
-                    f.write(str(ps[0].fitness)+",")
+                ps2.sort(key=lambda x: x.fitness, reverse=True)
+                with open("fitnessDataPTKxx"+str(self.xi), "a") as f:
+                    f.write(str(ps2[0].fitness)+",")
 
                 section_size = int(self.populationSize / 10)
 
@@ -68,33 +74,17 @@ class PARALLEL_HILL_CLIMBER:
                         self.Evolve_For_One_Generation(index, section_ps[0])
 
 
-                # self.Evolve_For_One_Generation(i, ps[0])
-                # self.Evolve_For_One_Generation(int(self.populationSize/4)+1, ps[1])
-                # self.Evolve_For_One_Generation(int(2*self.populationSize/4)+1, ps[2])
-                # self.Evolve_For_One_Generation(int(3*self.populationSize/4)+1, ps[3])
 
-                
-        # mx = []
-        # for i in self.parents:
-        #     mx.append(self.parents[i])
+        if self.gui:
+            mx = []
+            for i in self.parents:
+                mx.append(self.parents[i])
 
-        # section_size = int(self.populationSize / 4)
+            section_size = int(self.populationSize / 4)
 
-        # for section in range(4):
-        #     start_index = section * section_size
-        #     end_index = (section + 1) * section_size
-        #     section_ps = mx[start_index:end_index]
+            mx.sort(key=lambda x: x.fitness, reverse=True)
 
-        #     section_ps.sort(key=lambda x: x.fitness, reverse=True)
-        #     x = input("prompt")
-        #     section_ps[0].Evaluate(True)
-
-        # mx.sort(key=lambda x: x.fitness, reverse=True)
-
-        # for i in range(5):
-        #     print(i)
-        #     x = input("prompt")
-        #     mx[i].Evaluate(True)
+            mx[i].Evaluate(True)
 
     def Evolve_For_One_Generation(self, id, parent):
         self.Spawn(id, parent)
