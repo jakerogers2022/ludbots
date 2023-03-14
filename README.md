@@ -4,6 +4,8 @@ CS 396 Artificial Life
 # Assignment 8 Final Project (Science)
 # Hypothesis: The parallel hill climbing (PHC) method is a slower and less effective method of evolution than top k selection (TK) and parallel top k (PTK) selection, with top k selection being the fastest, but parallel top k selection being more effective long term. 
 
+The null hypothesis is that there is no significant difference in the performance of the three algorithms, while the alternative hypothesis is that there is a significant difference in the performance of at least one algorithm.
+
 # Experiment
 Utilize the three evolution algorithms (parallel hill climber, top k selection, and parallel top k selection) to evolve locomotion for a constant population size of 200, 50 generations, k value of 10, and for 10 trials each and compare which one is most effective at optimizing fitness. For a total of 300,000 simulated creatures.
 
@@ -11,11 +13,19 @@ Utilize the three evolution algorithms (parallel hill climber, top k selection, 
 - Parallel hill climbing: This method performs hill climbing with 200 parents in parallel with one another. 
   200 Parents -> 200 Children -> For each child parent pair pick best one as next parent -> Repeat
   
+  ![image](https://user-images.githubusercontent.com/71994929/225128502-d07ca65e-74e3-4a00-a43e-40cbd4e9197b.png)
+
+  
 - Top k selection: This method is more of a pool based method where the top performers each have 20 children and everyone competes against everyone
   200 Parents -> Top 10 selected -> 20 children each -> Evaluate Children -> Replace parents if children do better -> Repeat
   
+![image](https://user-images.githubusercontent.com/71994929/225134414-edaf7fb4-17e1-4758-8c9c-ecc451cc38e0.png)
+  
 - Parallel Top k selection: This method is similar to top k but is basically performing smaller population size top k with no cross over between sections
   10 Sections of 20 parents -> Top performer in each section selected -> Each section repopulated with children of top performer -> Repeat
+  
+ ![image](https://user-images.githubusercontent.com/71994929/225134452-33d006a9-3732-45f8-83dc-fbf77542dea5.png)
+
 
 # Evolution method
 The aspects being evolved are:
@@ -52,7 +62,7 @@ The tree is generated recursively. Given a link it creates a random number of ch
 ![image](https://user-images.githubusercontent.com/71994929/219984674-ba58ce83-8f07-4fed-b704-9db52cab1c14.png)
 
 # Fitness function
-The fitness funtion used to evaluate the ability of the bots is the absolute value of the distance from the origin in the x, y plane.
+The fitness funtion used to evaluate the ability of the bots is the square of the distance from the origin in the x, y plane.
 
 # Results
 Fitness plots for each of the three methods
@@ -63,10 +73,28 @@ Fitness plots for each of the three methods
 # Analysis
 ![image](https://user-images.githubusercontent.com/71994929/224863751-9422a564-45e6-48e3-b742-d2f01ea2ff03.png)
 
-In order to determine the effectiveness of the three evolution algorithms I plotted the average fitness for each method at each generation across the 10 trials.
+In order to determine the effectiveness of the three evolution algorithms I plotted the average fitness for each method at each generation across the 10 trials. As evident from the graph parallel top k performs the best by a significant margin. Top K outperforms the hillclimber initially but after many generations the PHC starts to do better. All three exhibit logarithmic growth with Top K flattening out more than the other methods.
+
+![image](https://user-images.githubusercontent.com/71994929/225123548-4c566354-9d32-4dec-8d74-77a06db25749.png)
+Here is a plot of the max fitness values at each generation across all 10 trials and 50 generations for each evolution method.
+The corresponding F and P values are as follows:
+F-value: 127.44076719837632
+P-value: 7.766465412549422e-52
+
+Given the high F value and Extremely low P value we can be confident in saying our results reject the null hypothesis and there is a significant difference in the performance of the three algorithms.
+
+We also will compare the final fitness values of each trail for each algorithm.
+
+![image](https://user-images.githubusercontent.com/71994929/225124635-5554e5af-c3e7-4856-9946-36dd4ff2d3f3.png)
+Here is a plot of the max fitness values for each of the 10 trials for each evolution method.
+The corresponding F and P values are as follows:
+F-value: 4.1169694621203865
+P-value: 0.027506456999200138
+
+Given the high F value and low P value we can also say there is a difference in the final performance of the algorithms after 50 trials.
 
 # Conclusion
-
+From the analysis above we can conclude that there is a significant difference in the performance of the evolutionary algorithms both in there performance throughout the 50 generations and in there final performance at the end of the 50 generations.
 
 # Run it yourself
 - Clone repo
