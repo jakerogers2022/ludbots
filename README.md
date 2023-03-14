@@ -6,6 +6,14 @@ CS 396 Artificial Life
 
 The null hypothesis is that there is no significant difference in the performance of the three algorithms, while the alternative hypothesis is that there is a significant difference in the performance of at least one algorithm.
 
+# Videos
+Short Clip: https://youtu.be/Y-U4JQICveE
+https://user-images.githubusercontent.com/71994929/225147694-22855042-c9ec-4c7b-a5e3-df4749e1eda5.mp4
+
+Full Video: 
+
+
+
 # Experiment
 Utilize the three evolution algorithms (parallel hill climber, top k selection, and parallel top k selection) to evolve locomotion for a constant population size of 200, 50 generations, k value of 10, and for 10 trials each and compare which one is most effective at optimizing fitness. For a total of 300,000 simulated creatures.
 
